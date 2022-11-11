@@ -4,4 +4,6 @@ from .models import Pessoa
 # Create your views here.
 def home(request):
     pessoas = Pessoa.objects.all()
-    return render(request, "index.html", {"Pessoas": pessoas})
+    print(pessoas)
+    print("chegamos auqui]")
+    return render(request, "index.html", {"pessoas": pessoas})

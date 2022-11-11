@@ -8,11 +8,16 @@
 </head>
 <body>
     <h1>  Hello World!!</h1>
-    <ul>
-        <li>Cabelo</li>
-        <li>Barba</li>
-        <li>Sombracelha</li>
-
-    </ul>
+    <section id="teste">
+        <h3> Hello </h3>
+        <ul>
+            <li> Teste</li>
+            {% for pessoa in pessoa %}
+            
+                <li> {{ pessoa.nome }} </li>
+                
+            {% endfor %}
+        </ul>
+    </section>
 </body>
 </html>
