@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from .models import Pessoa
 
 # Create your views here.
 def home(request):
-    return render(request, "index.html")
+    pessoas = Pessoa.objects.all()
+    return render(request, "index.html", {"Pessoas": pessoas})
