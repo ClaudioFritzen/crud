@@ -6,18 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <h1>  Hello World!!</h1>
-    <section id="teste">
-        <h3> Hello </h3>
-        <ul>
-            <li> Teste</li>
-            {% for pessoa in pessoa %}
+    <h1> Hi </h1>
+    <ul>
+        <br>
+        {% for pessoa in pessoas %}
             
-                <li> {{ pessoa.nome }} </li>
+            <li> {{ pessoa.id }} - {{pessoa.nome}} 
                 
-            {% endfor %}
-        </ul>
-    </section>
-</body>
+                <a href=" {% url 'editar' pessoa.id %}"> Editar </a>
+                
+            </ul>
+        {% endfor %}
+    </ul>
+
+    <form action=" {% url 'salvar' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="nome" placeholder="Digite seu nome" >
+        <button type="submit"> Salvar </button>
+
+    </form>
+
+    </body>
 </html>
