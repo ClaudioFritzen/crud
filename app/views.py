@@ -10,7 +10,8 @@ def salvar(request):
     vnome = request.POST.get("nome")
     Pessoa.objects.create(nome=vnome)
     pessoas = Pessoa.objects.all()
-    return render (request, "Index.html", {"pessoa": pessoas})
+    return redirect(home)
+    #return render (request, "Index.html", {"pessoa": pessoas})
     
 def editar(request, id):
     pessoa = Pessoa.objects.get(id=id)
@@ -21,5 +22,10 @@ def update(request, id):
     pessoa = Pessoa.objects.get(id=id)
     pessoa.nome = vnome
     pessoa.save()
+    return redirect(home)
+
+def delete(request, id):
+    pessoa = Pessoa.objects.get(id=id)
+    pessoa.delete()
     return redirect(home)
     

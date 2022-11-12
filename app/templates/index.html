@@ -16,6 +16,7 @@
             <li> {{ pessoa.id }} - {{pessoa.nome}} 
                 
                 <a href=" {% url 'editar' pessoa.id %}"> Editar </a>
+                <a href=" {% url 'delete' pessoa.id %}"> Excluir </a>
                 
             </ul>
         {% endfor %}
