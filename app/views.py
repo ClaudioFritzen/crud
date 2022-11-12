@@ -1,17 +1,34 @@
 from django.shortcuts import render, redirect
 from .models import Pessoa
 
+# importações para mensagens do bootstrap
+from django.contrib import messages
+from django.contrib.messages import constants
+
+
 # Create your views here.
 def home(request):
     pessoas = Pessoa.objects.all()
     return render(request, "index.html", {"pessoas": pessoas})
 
 def salvar(request):
-    vnome = request.POST.get("nome")
-    Pessoa.objects.create(nome=vnome)
-    pessoas = Pessoa.objects.all()
-    return redirect(home)
-    #return render (request, "Index.html", {"pessoa": pessoas})
+    if request.method == "GET":
+        pessoas = Pessoa.objects.all()
+        return render(request, "index.html", {"pessoas": pessoas})
+    elif request.method == "POST":
+        vnome = request.POST.get("nome")
+        
+        pessoas = Pessoa.objects.filter(nome=vnome)
+        print(vnome)
+        if pessoas.exists():
+            messages.add_message(request, constants.ERROR, 'Nome já existe')
+            return redirect(home)
+        else:
+            messages.add_message(request, constants.SUCCESS, "Nome cadastrato")
+            vnome = Pessoa.objects.create(nome=vnome)
+            return render (request, "Index.html", {"pessoa": pessoas})
+
+    #       
     
 def editar(request, id):
     pessoa = Pessoa.objects.get(id=id)
