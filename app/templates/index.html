@@ -1,10 +1,55 @@
-{% extends 'base.html' %}
+{% comment %} {% extends 'base.html' %} {% endcomment %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'base/css/style.css' %}">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-{% block 'head' %}
-    <link rel="stylesheet" href="{% static 'app/css/style.css' %}"
-{% endblock 'head' %}
 
-{% block 'body' %}
-    <h1> Chegamos ao index</h1>
-{% endblock 'body' %}
+    <title>Cadastra Clientes </title>
+</head>
+<body>
+    
+    <h1> Cadastre seu nome </h1>
+    <div id="mensagesn">
+        <!-- mensagens do Alerts-->
+        {% if messages %}
+        {% for message in messages %}
+            <br>
+            <section class="alert {{message.tags}}">
+                {{message}}
+            </section>
+        {% endfor %}
+    {% endif %}
+    <!-- fim das mensagens-->
+    </div>
+    <ul>
+        <br>
+        {% for pessoa in pessoas %}
+            
+            <li> {{ pessoa.id }} - {{pessoa.nome}} 
+                
+                <a class="editar" href=" {% url 'editar' pessoa.id %}"> Editar </a>
+                <a href=" {% url 'delete' pessoa.id %}"> Excluir </a>
+                
+            </ul>
+        {% endfor %}
+    </ul>
+
+    <form action=" {% url 'salvar' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="nome" placeholder="Digite seu nome" >
+        <button type="submit"> Salvar </button>
+
+    </form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+ 

@@ -40,10 +40,12 @@ def update(request, id):
     pessoa = Pessoa.objects.get(id=id)
     pessoa.nome = vnome
     pessoa.save()
+    messages.add_message(request, constants.INFO, 'Dados Atualizado com sucesso.')
     return redirect(home)
 
 def delete(request, id):
     pessoa = Pessoa.objects.get(id=id)
     pessoa.delete()
+    messages.add_message(request, constants.WARNING, 'Dados excluido com sucesso')
     return redirect(home)
     
