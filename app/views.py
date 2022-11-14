@@ -26,7 +26,8 @@ def salvar(request):
         else:
             messages.add_message(request, constants.SUCCESS, "Nome cadastrato")
             vnome = Pessoa.objects.create(nome=vnome)
-            return render (request, "Index.html", {"pessoa": pessoas})
+            return redirect(home)
+            #return render (request, "Index.html", {"pessoa": pessoas})
 
     #       
     

@@ -1,0 +1,32 @@
+<h1> Hi </h1>
+<div id="mensagesn">
+    <!-- mensagens do Alerts-->
+    {% if messages %}
+    {% for message in messages %}
+        <br>
+        <section class="alert {{message.tags}}">
+            {{message}}
+        </section>
+    {% endfor %}
+{% endif %}
+<!-- fim das mensagens-->
+</div>
+<ul>
+    <br>
+    {% for pessoa in pessoas %}
+        
+        <li> {{ pessoa.id }} - {{pessoa.nome}} 
+            
+            <a href=" {% url 'editar' pessoa.id %}"> Editar </a>
+            <a href=" {% url 'delete' pessoa.id %}"> Excluir </a>
+            
+        </ul>
+    {% endfor %}
+</ul>
+
+<form action=" {% url 'salvar' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="nome" placeholder="Digite seu nome" >
+    <button type="submit"> Salvar </button>
+
+</form>
